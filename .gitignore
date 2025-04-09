@@ -1,0 +1,14 @@
+# Node dependencies
+backend/node_modules/
+my-app/node_modules/
+
+# Build output
+my-app/dist/
+
+# Environment variables
+backend/.env
+my-app/.env
+
+# System files
+.DS_Store
+Thumbs.db

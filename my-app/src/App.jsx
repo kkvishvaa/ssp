@@ -16,7 +16,7 @@ function App() {
     formData.append('pdf', file);
 
     try {
-      const res = await axios.post('http://localhost:5000/upload', formData);
+      const res = await axios.post('https://ssp-gpvi.onrender.com/upload', formData);
       setMessage(res.data.message);
       fetchUploadedFiles();
     } catch (err) {
@@ -26,7 +26,7 @@ function App() {
 
   const fetchUploadedFiles = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/files');
+      const res = await axios.get('https://ssp-gpvi.onrender.com/files');
       setUploadedFiles(res.data);
     } catch (err) {
       console.error('Error fetching files:', err);

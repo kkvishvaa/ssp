@@ -18,7 +18,7 @@ function App() {
     try {
       const res = await axios.post('https://ssp-gpvi.onrender.com/upload', formData);
       setMessage(res.data.message);
-      fetchUploadedFiles();
+      await fetchUploadedFiles();
     } catch (err) {
       setMessage('Upload failed.');
     }
@@ -27,7 +27,19 @@ function App() {
   const fetchUploadedFiles = async () => {
     try {
       const res = await axios.get('https://ssp-gpvi.onrender.com/files');
-      setUploadedFiles(res.data);
+      const filesWithBlobs = await Promise.all(
+        res.data.map(async (file) => {
+          const response = await axios.get(`https://ssp-gpvi.onrender.com/file/${file._id}`, {
+            responseType: 'arraybuffer'
+          });
+          const blob = new Blob([response.data], { type: 'application/pdf' });
+          return {
+            ...file,
+            blobUrl: URL.createObjectURL(blob)
+          };
+        })
+      );
+      setUploadedFiles(filesWithBlobs);
     } catch (err) {
       console.error('Error fetching files:', err);
     }
@@ -35,6 +47,10 @@ function App() {
 
   useEffect(() => {
     fetchUploadedFiles();
+    return () => {
+      // Cleanup blob URLs
+      uploadedFiles.forEach(file => URL.revokeObjectURL(file.blobUrl));
+    };
   }, []);
 
   return (
@@ -65,11 +81,17 @@ function App() {
       <ul className="list-group">
         {uploadedFiles.map((file, index) => (
           <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-            {file.name}
+            <div>
+              {file.name}
+              <div className="text-muted small mt-1" style={{ fontSize: '0.8rem' }}>
+                Blob URL: {file.blobUrl}
+              </div>
+            </div>
             <a
-              href={`data:application/pdf;base64,${file.data}`}
+              href={file.blobUrl}
               download={file.name}
               className="btn btn-outline-success btn-sm"
+              data-bloburl={file.blobUrl}
             >
               Download
             </a>

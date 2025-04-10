@@ -10,7 +10,7 @@ const app = express();
 const port = 5000;
 const upload = multer({ storage: multer.memoryStorage() });
 
-app.use('*',cors());
+app.use(cors());
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)

@@ -11,7 +11,7 @@ const port = 5000;
 const upload = multer({ storage: multer.memoryStorage() });
 
 app.use(cors());
-
+app.options('*', cors());
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))

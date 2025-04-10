@@ -54,52 +54,75 @@ function App() {
   }, []);
 
   return (
-    <div className="container mt-5 bg-light border rounded p-4 custom-container">
-      <div className="text-center mb-5">
-        <img src="/govt-logo.png" alt="Government Logo" className="gov-logo mb-3" />
-        <h1 className="main-heading">SSP - Government of India</h1>
-        <p className="sub-heading">Student Scholarship Portal - Announcements Upload</p>
-      </div>
-
-      <div className="card p-4 mb-4 shadow-sm upload-card">
-        <form onSubmit={handleUpload}>
-          <div className="mb-3">
-            <label className="form-label fw-bold">Upload Announcement (PDF)</label>
-            <input
-              type="file"
-              accept="application/pdf"
-              className="form-control"
-              onChange={(e) => setFile(e.target.files[0])}
-            />
-          </div>
-          <button className="btn btn-primary w-100" type="submit">Upload</button>
-        </form>
-        {message && <p className="mt-3 text-success text-center fw-semibold">{message}</p>}
-      </div>
-
-      <h4 className="text-dark mb-3 border-bottom pb-2">📜 Uploaded Announcements</h4>
-      <ul className="list-group">
-        {uploadedFiles.map((file, index) => (
-          <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              {file.name}
-              <div className="text-muted small mt-1" style={{ fontSize: '0.8rem' }}>
-                Blob URL: {file.blobUrl}
-              </div>
+    <div className="app-wrapper">
+      <header className="header">
+        <div className="header-inner">
+          <img src="/govt-logo.png" alt="Government Logo" className="gov-logo" />
+          <h1 className="site-title">State Scholarship Portal</h1>
+          <nav>
+            <a href="/" className="nav-link">Home</a>
+            <a href="/about" className="nav-link">About</a>
+            <a href="/contact" className="nav-link">Contact</a>
+          </nav>
+        </div>
+      </header>
+  
+      <div className="tricolor-bar"></div>
+  
+      <div className="custom-container mt-5">
+  
+        <div className="text-center mb-5">
+          <img src="/govt-logo.png" alt="Government Logo" className="gov-logo mb-3" />
+          <h1 className="main-heading">SSP - Government of India</h1>
+          <p className="sub-heading">Student Scholarship Portal - Announcements Upload</p>
+        </div>
+  
+        <div className="card p-4 mb-4 shadow-sm upload-card">
+          <form onSubmit={handleUpload}>
+            <div className="mb-3">
+              <label className="form-label fw-bold">Upload Announcement (PDF)</label>
+              <input
+                type="file"
+                accept="application/pdf"
+                className="form-control"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
             </div>
-            <a
-              href={file.blobUrl}
-              download={file.name}
-              className="btn btn-outline-success btn-sm"
-              data-bloburl={file.blobUrl}
-            >
-              Download
-            </a>
-          </li>
-        ))}
-      </ul>
+            <button className="btn btn-primary w-100" type="submit">Upload</button>
+          </form>
+          {message && <p className="mt-3 text-success text-center fw-semibold">{message}</p>}
+        </div>
+  
+        <h4 className="text-dark mb-3 border-bottom pb-2">📜 Uploaded Announcements</h4>
+        <ul className="list-group">
+          {uploadedFiles.map((file, index) => (
+            <li key={index} className="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                {file.name}
+                <div className="text-muted small mt-1" style={{ fontSize: '0.8rem' }}>
+                  Blob URL: {file.blobUrl}
+                </div>
+              </div>
+              <a
+                href={file.blobUrl}
+                download={file.name}
+                className="btn btn-outline-success btn-sm"
+                data-bloburl={file.blobUrl}
+              >
+                Download
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+  
+      <footer className="footer text-center">
+        <div>© 2025 State Scholarship Portal | Government of Karnataka</div>
+        <div>Helpline: 1902 | Email: support@ssp.karnataka.gov.in</div>
+      </footer>
     </div>
   );
+  
 }
 
 export default App;

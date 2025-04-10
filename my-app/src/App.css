@@ -1,42 +1,183 @@
-/* App.css */
+/* Reset and base styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
 body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: #f3f4f6;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.custom-container {
-  max-width: 800px;
-  margin: auto;
-  background: #fff;
-  border: 1px solid #dee2e6;
+/* Layout Wrapper */
+.app-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
+/* Header */
+.header {
+  background-color: #0056b3;
+  color: white;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.header .header-inner {
+  width: 100%;
+  padding: 0 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header .nav-link {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem;
+  transition: opacity 0.2s ease;
+}
+
+.header .nav-link:hover {
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
+/* Tricolor bar */
+.tricolor-bar {
+  height: 8px;
+  background: linear-gradient(
+    to right, 
+    #ff9933 33.33%, 
+    #ffffff 33.33% 66.66%, 
+    #138808 66.66%
+  );
+  width: 100%;
+}
+
+/* Main Content Container */
+.custom-container {
+  width: 100%;
+  margin: 2rem 0;
+  padding: 2rem 5%;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Logo */
+.gov-logo {
+  width: 80px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Headings */
 .main-heading {
   color: #003366;
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   font-weight: bold;
+  margin-bottom: 0.75rem;
+  text-align: center;
 }
 
 .sub-heading {
   color: #666;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  line-height: 1.4;
 }
 
-.gov-logo {
-  width: 80px;
-  height: auto;
-}
-
+/* Upload section */
 .upload-card {
   background-color: #f8f9fa;
   border-left: 5px solid #0d6efd;
+  margin: 2rem 0;
+  padding: 2rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
+/* File list */
 .list-group-item {
   font-weight: 500;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #eee;
 }
 
+/* Button */
 .btn-outline-success {
   font-weight: 500;
+  transition: all 0.2s ease;
+  padding: 0.75rem 1.5rem;
+}
+
+/* Footer */
+.footer {
+  background-color: #343a40;
+  color: white;
+  padding: 20px 5%;
+  font-size: 0.9rem;
+  text-align: center;
+  width: 100%;
+  margin-top: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .header .header-inner {
+    padding: 0 5%;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .main-heading {
+    font-size: 1.75rem;
+  }
+
+  .sub-heading {
+    font-size: 1rem;
+    padding: 0 5%;
+  }
+
+  .custom-container {
+    padding: 1.5rem 5%;
+    margin: 1.5rem 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .upload-card {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .gov-logo {
+    width: 70px;
+  }
+
+  .btn-outline-success {
+    width: 100%;
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .custom-container {
+    padding: 3rem 10%;
+  }
+  
+  .header .header-inner {
+    padding: 0 10%;
+  }
 }
